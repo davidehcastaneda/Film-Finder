@@ -3,6 +3,7 @@ package com.dehcast.filmfinder.di.component
 import android.app.Application
 import com.dehcast.filmfinder.FilmFinderApplication
 import com.dehcast.filmfinder.di.modules.ActivityBuilderModule
+import com.dehcast.filmfinder.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -13,7 +14,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,
-        ActivityBuilderModule::class
+        ActivityBuilderModule::class,
+        NetworkModule::class
     ]
 )
 interface AppComponent : AndroidInjector<FilmFinderApplication> {
