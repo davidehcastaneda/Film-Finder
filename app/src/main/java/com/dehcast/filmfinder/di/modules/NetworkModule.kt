@@ -1,6 +1,8 @@
 package com.dehcast.filmfinder.di.modules
 
 import com.dehcast.filmfinder.BuildConfig
+import com.dehcast.filmfinder.apis.MovieDetailsApi
+import com.dehcast.filmfinder.apis.MovieDiscoveryApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -72,4 +74,12 @@ class NetworkModule {
         client: OkHttpClient,
     ): Retrofit =
         builder.baseUrl(BuildConfig.API_URL).addConverterFactory(converter).client(client).build()
+
+    @Provides
+    fun provideMovieDetailsApi(retrofit: Retrofit): MovieDetailsApi =
+        retrofit.create(MovieDetailsApi::class.java)
+
+    @Provides
+    fun provideMovieDiscoveryApi(retrofit: Retrofit): MovieDiscoveryApi =
+        retrofit.create(MovieDiscoveryApi::class.java)
 }
