@@ -49,12 +49,18 @@ dependencies {
             deps.dagger.core,
             deps.dagger.android,
             deps.dagger.androidSupport,
+
             deps.retrofit.core,
             deps.retrofit.converter,
             deps.loggingInterceptor,
+
             deps.navigation.fragment,
             deps.navigation.ui,
             deps.navigation.support,
+
+            deps.lifecycle.core,
+            deps.lifecycle.viewmodel,
+            deps.lifecycle.livedata,
     )
 
     kapt(
