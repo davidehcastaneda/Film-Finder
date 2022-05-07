@@ -5,9 +5,14 @@ plugins {
 
 apply from: '../dependencies.gradle'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdk 32
+
+    buildFeatures{
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.dehcast.filmfinder"
@@ -47,6 +52,9 @@ dependencies {
             deps.retrofit.core,
             deps.retrofit.converter,
             deps.loggingInterceptor,
+            deps.navigation.fragment,
+            deps.navigation.ui,
+            deps.navigation.support,
     )
 
     kapt(
