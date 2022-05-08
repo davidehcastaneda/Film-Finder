@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.FilmFinder.Thumbnail" parent="Theme.FilmFinder">
+        <item name="cardCornerRadius">@dimen/thumbnail_corner_radius</item>
+    </style>
+
     <style name="Theme.FilmFinder.Text" parent="Theme.FilmFinder">
         <item name="android:textStyle">normal</item>
         <item name="fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">@dimen/text_default</item>
+    </style>
+
+    <style name="Theme.FilmFinder.Text.Title" parent="Theme.FilmFinder.Text">
+        <item name="fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="Theme.FilmFinder.Text.FilmSpecs" parent="Theme.FilmFinder.Text">
+        <item name="lineHeight">@dimen/movie_title_line_spacing</item>
     </style>
 </resources>

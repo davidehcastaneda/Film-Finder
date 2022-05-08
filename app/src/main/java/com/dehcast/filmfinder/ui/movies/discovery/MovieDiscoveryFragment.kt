@@ -1,5 +1,6 @@
 package com.dehcast.filmfinder.ui.movies.discovery
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.dehcast.filmfinder.R
 import com.dehcast.filmfinder.databinding.FragmentMovieDiscoveryBinding
+import com.dehcast.filmfinder.ui.movies.discovery.adapter.MovieDiscoveryAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,6 +36,11 @@ class MovieDiscoveryFragment : DaggerFragment() {
         )[MovieDiscoveryViewModel::class.java]
     }
 
+    private val movieAdapter by lazy { MovieDiscoveryAdapter() }
+    private val landscapeColumns = 4
+    private val portraitColumns = 2
+    private var recyclerColumns = portraitColumns
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -44,19 +51,27 @@ class MovieDiscoveryFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setSampleNavigation()
+        setupMovieRecycler()
         observeViewModel()
-        fetchMovies()
+        if (movieDiscoveryViewModel.state.value is MovieDiscoveryState.None) fetchMovies()
     }
 
-    private fun setSampleNavigation() {
-        binding.root.setOnClickListener {
-            navigateToMovieDetails()
+    private fun setupMovieRecycler() {
+        updateRecyclerColumnsBasedOffOrientation()
+        with(binding.movieRecycler) {
+            layoutManager = GridLayoutManager(context, recyclerColumns)
+            adapter = movieAdapter
         }
     }
 
-    private fun navigateToMovieDetails() {
-        findNavController().navigate(R.id.action_movieDiscoveryFragment_to_movieDetailsFragment)
+    private fun updateRecyclerColumnsBasedOffOrientation() {
+        try {
+            val orientation = requireActivity().resources.configuration.orientation
+            recyclerColumns =
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) portraitColumns
+                else landscapeColumns
+        } catch (e: Throwable) {
+        }
     }
 
     private fun observeViewModel() {
@@ -72,11 +87,18 @@ class MovieDiscoveryFragment : DaggerFragment() {
     private fun onStateChanged(state: MovieDiscoveryState) {
         when (state) {
             MovieDiscoveryState.Failure -> onFailureState()
+            MovieDiscoveryState.Loading -> onLoadingState()
             is MovieDiscoveryState.Success -> onSuccessState(state)
         }
     }
 
+    private fun onLoadingState() {
+        binding.movieRecycler.visibility = View.GONE
+        binding.shimmerGroup.visibility = View.VISIBLE
+    }
+
     private fun onFailureState() {
+        binding.shimmerGroup.visibility = View.GONE
         Toast.makeText(
             context,
             getString(R.string.movie_discovery_fetch_failed_message),
@@ -85,9 +107,9 @@ class MovieDiscoveryFragment : DaggerFragment() {
     }
 
     private fun onSuccessState(state: MovieDiscoveryState.Success) {
-        Toast.makeText(context,
-            getString(R.string.movie_discovery_fetch_succeeded_message),
-            Toast.LENGTH_SHORT).show()
+        movieAdapter.addMovies(state.movies)
+        binding.movieRecycler.visibility = View.VISIBLE
+        binding.shimmerGroup.visibility = View.GONE
     }
 
     private fun fetchMovies() {

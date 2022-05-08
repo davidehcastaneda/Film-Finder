@@ -61,11 +61,16 @@ dependencies {
             deps.lifecycle.core,
             deps.lifecycle.viewmodel,
             deps.lifecycle.livedata,
+
+            deps.glide.core,
+
+            deps.shimmer
     )
 
     kapt(
             deps.dagger.compiler,
             deps.dagger.androidCompiler,
+            deps.glide.compiler
     )
 
     testImplementation(

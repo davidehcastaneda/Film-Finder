@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    Text dimens   -->
+    <dimen name="row_item_movie_margin">12dp</dimen>
+    <dimen name="thumbnail_margin">8dp</dimen>
+    <dimen name="thumbnail_padding">8dp</dimen>
+    <dimen name="thumbnail_image_height">240dp</dimen>
+    <dimen name="thumbnail_corner_radius">16dp</dimen>
+    <dimen name="movie_title_line_spacing">16dp</dimen>
+    <dimen name="movie_description_bottom_text_padding">16dp</dimen>
+    <!--    Text dimens   -->
     <dimen name="text_default">12sp</dimen>
 </resources>

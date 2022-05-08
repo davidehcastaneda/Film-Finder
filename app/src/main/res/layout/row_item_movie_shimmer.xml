@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_row_shimmer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/row_item_movie_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/thumbnail_image_height"
+            android:background="@color/gray_100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
+        <View
+            android:id="@+id/rating"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/year"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/rating"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail"
+            app:layout_constraintWidth_percent="0.3" />
+
+
+        <View
+            android:id="@+id/thumbnail2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/thumbnail_image_height"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
+        <View
+            android:id="@+id/rating2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail2"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail2"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/year2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail2"
+            app:layout_constraintTop_toBottomOf="@id/rating2"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/title2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/thumbnail2"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail2"
+            app:layout_constraintWidth_percent="0.3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
