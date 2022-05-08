@@ -139,18 +139,18 @@ class MovieDiscoveryViewModelTest {
 
     private fun givenSuccessHasData() {
         givenPageWithLotsOfPages()
-        every { FAKE_PAGE_RESPONSE.results }.returns(FAKE_MOVIES)
+        every { FAKE_PAGE_RESPONSE.movies }.returns(FAKE_MOVIES)
         every { FAKE_MOVIES.isEmpty() }.returns(false)
     }
 
     private fun givenSuccessHasNULLMovies() {
         givenPageWithLotsOfPages()
-        every { FAKE_PAGE_RESPONSE.results }.returns(null)
+        every { FAKE_PAGE_RESPONSE.movies }.returns(null)
     }
 
     private fun givenSuccessHasNOMovies() {
         givenPageWithLotsOfPages()
-        every { FAKE_PAGE_RESPONSE.results }.returns(emptyList())
+        every { FAKE_PAGE_RESPONSE.movies }.returns(emptyList())
         every { FAKE_MOVIES.isEmpty() }.returns(true)
     }
 

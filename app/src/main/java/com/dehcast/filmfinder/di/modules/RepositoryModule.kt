@@ -1,6 +1,7 @@
 package com.dehcast.filmfinder.di.modules
 
 import com.dehcast.filmfinder.apis.MovieDiscoveryApi
+import com.dehcast.filmfinder.apis.MovieThumbnailConfigurationApi
 import com.dehcast.filmfinder.repositories.MovieDiscoveryRepository
 import com.dehcast.filmfinder.repositories.MovieDiscoveryRepositoryContract
 import dagger.Module
@@ -12,6 +13,9 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieDiscoveryRepository(movieDiscoveryApi: MovieDiscoveryApi): MovieDiscoveryRepositoryContract =
-        MovieDiscoveryRepository(movieDiscoveryApi)
+    fun provideMovieDiscoveryRepository(
+        movieDiscoveryApi: MovieDiscoveryApi,
+        thumbnailConfigurationApi: MovieThumbnailConfigurationApi,
+    ): MovieDiscoveryRepositoryContract =
+        MovieDiscoveryRepository(movieDiscoveryApi, thumbnailConfigurationApi)
 }
