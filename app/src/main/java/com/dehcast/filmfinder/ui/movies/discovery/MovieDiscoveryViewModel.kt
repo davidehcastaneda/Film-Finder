@@ -48,7 +48,7 @@ class MovieDiscoveryViewModel @Inject constructor(
     @VisibleForTesting
     fun handlePageFetched(response: NetworkResponse.Success<MoviePageResponse>) {
         checkIfCanStillQueryMore(response.data.totalPages)
-        val results = response.data.results
+        val results = response.data.movies
         _state.value =
             if (results.isNullOrEmpty()) MovieDiscoveryState.Failure
             else MovieDiscoveryState.Success(results)

@@ -3,10 +3,11 @@ package com.dehcast.filmfinder.model
 import com.google.gson.annotations.SerializedName
 
 data class MoviePageResponse(
-    val page: Int?,
-    val results: List<MoviePreview>?,
+    val page: Int? = null,
+    @SerializedName("results")
+    val movies: List<MoviePreview>? = null,
     @SerializedName("total_results")
-    val totalResults: Int?,
+    val totalResults: Int? = null,
     @SerializedName("total_pages")
-    val totalPages: Int?,
+    val totalPages: Int? = null,
 )
