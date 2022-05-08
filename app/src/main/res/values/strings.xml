@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Film Finder</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank_fragment2">Hello blank fragment2</string>
-    <string name="movie_discovery_fetch_failed_message">Oops… something went wrong</string>
-    <string name="movie_discovery_fetch_succeeded_message">movies fetched</string>
+    <string name="movie_discovery_fetch_failed_message">Ooops, something went wrong</string>
+    <string name="popularity_rate">%s/10</string>
+    <string name="movie_with_no_id_onclick_error_message">I Can\'t find movie details for that one… /n try again later.</string>
 </resources>
