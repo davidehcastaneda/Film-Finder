@@ -37,7 +37,13 @@ def deps = [
                 'compiler':             "com.google.dagger:dagger-compiler:$versions.dagger",
                 'androidCompiler':      "com.google.dagger:dagger-android-processor:$versions.dagger"
         ],
-        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:4.9.1"
+        'loggingInterceptor': "com.squareup.okhttp3:logging-interceptor:4.9.1",
+        'test': [
+                'core':                 "androidx.test.espresso:espresso-core:3.4.0",
+                'junit':                "androidx.test.ext:junit:1.1.3",
+                'coroutines':           "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0",
+                'mockK':                "io.mockk:mockk:1.11.0",
+        ]
 ]
 
 ext.deps = deps
