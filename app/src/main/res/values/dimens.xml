@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Text dimens   -->
+    <dimen name="text_default">12sp</dimen>
+</resources>
