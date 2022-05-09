@@ -3,6 +3,7 @@ package com.dehcast.filmfinder.ui.movies.discovery.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dehcast.filmfinder.model.MoviePreview
+import com.dehcast.filmfinder.ui.movies.discovery.adapter.diffutils.MovieDiscoveryDiffUtils
 
 interface BottomReachedListener {
 
@@ -27,7 +28,12 @@ class MovieDiscoveryAdapter(
     override fun getItemCount() = movies.size
 
     fun addMovies(newMovies: List<MoviePreview>) {
+        MovieDiscoveryDiffUtils().dispatchDiffs(
+            targetMovies = newMovies,
+            originalMovies = movies,
+            targetAdapter = this
+        )
+        movies.clear()
         movies.addAll(newMovies)
-        notifyDataSetChanged()
     }
 }
