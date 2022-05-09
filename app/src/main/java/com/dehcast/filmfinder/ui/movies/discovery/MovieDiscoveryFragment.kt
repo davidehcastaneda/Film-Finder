@@ -13,13 +13,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dehcast.filmfinder.R
 import com.dehcast.filmfinder.databinding.FragmentMovieDiscoveryBinding
+import com.dehcast.filmfinder.ui.movies.discovery.adapter.BottomReachedListener
 import com.dehcast.filmfinder.ui.movies.discovery.adapter.MovieDiscoveryAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MovieDiscoveryFragment : DaggerFragment() {
+class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
 
     private var _binding: FragmentMovieDiscoveryBinding? = null
 
@@ -36,7 +37,7 @@ class MovieDiscoveryFragment : DaggerFragment() {
         )[MovieDiscoveryViewModel::class.java]
     }
 
-    private val movieAdapter by lazy { MovieDiscoveryAdapter() }
+    private val movieAdapter by lazy { MovieDiscoveryAdapter(this) }
     private val landscapeColumns = 4
     private val portraitColumns = 2
     private var recyclerColumns = portraitColumns
@@ -93,8 +94,14 @@ class MovieDiscoveryFragment : DaggerFragment() {
     }
 
     private fun onLoadingState() {
-        binding.movieRecycler.visibility = View.GONE
-        binding.shimmerGroup.visibility = View.VISIBLE
+        showShimmerIfRecyclerAndShimmerNotVisible()
+    }
+
+    private fun showShimmerIfRecyclerAndShimmerNotVisible() {
+        if (binding.movieRecycler.visibility == View.GONE && binding.shimmerGroup.visibility == View.GONE) {
+            binding.movieRecycler.visibility = View.GONE
+            binding.shimmerGroup.visibility = View.VISIBLE
+        }
     }
 
     private fun onFailureState() {
@@ -119,6 +126,10 @@ class MovieDiscoveryFragment : DaggerFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onBottomReached() {
+        movieDiscoveryViewModel.fetchMoviePage()
     }
 
 }
