@@ -3,6 +3,7 @@ package com.dehcast.filmfinder.di.modules
 import com.dehcast.filmfinder.BuildConfig
 import com.dehcast.filmfinder.apis.MovieDetailsApi
 import com.dehcast.filmfinder.apis.MovieDiscoveryApi
+import com.dehcast.filmfinder.apis.MovieGenreApi
 import com.dehcast.filmfinder.apis.MovieThumbnailConfigurationApi
 import dagger.Module
 import dagger.Provides
@@ -87,4 +88,8 @@ class NetworkModule {
     @Provides
     fun provideMovieThumbnailConfigurationApi(retrofit: Retrofit): MovieThumbnailConfigurationApi =
         retrofit.create(MovieThumbnailConfigurationApi::class.java)
+
+    @Provides
+    fun provideMovieGenreApi(retrofit: Retrofit): MovieGenreApi =
+        retrofit.create(MovieGenreApi::class.java)
 }

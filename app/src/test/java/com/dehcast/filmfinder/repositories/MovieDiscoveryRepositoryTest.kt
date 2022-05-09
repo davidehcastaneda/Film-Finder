@@ -1,12 +1,10 @@
 package com.dehcast.filmfinder.repositories
 
 import com.dehcast.filmfinder.apis.MovieDiscoveryApi
+import com.dehcast.filmfinder.apis.MovieGenreApi
 import com.dehcast.filmfinder.apis.MovieThumbnailConfigurationApi
 import com.dehcast.filmfinder.model.*
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -23,6 +21,9 @@ class MovieDiscoveryRepositoryTest {
     private lateinit var configApi: MovieThumbnailConfigurationApi
 
     @MockK
+    private lateinit var genreApi: MovieGenreApi
+
+    @MockK
     private lateinit var fakePageResponse: MoviePageResponse
 
     @MockK
@@ -31,11 +32,13 @@ class MovieDiscoveryRepositoryTest {
     private var expectedUrl: String = ""
     private val notEmptyUrl = "https://fake"
     private val notEmptySize = "first poster size"
+    private val defaultGenreId = 1000
+    private val defaultGenreName = "Action"
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        repository = MovieDiscoveryRepository(movieDiscoveryApi, configApi)
+        repository = MovieDiscoveryRepository(movieDiscoveryApi, configApi, genreApi)
     }
 
     @Test
@@ -171,13 +174,84 @@ class MovieDiscoveryRepositoryTest {
         assert(response.movies?.get(0)?.posterPath?.contains(baseUrl) == true)
     }
 
+    @Test
+    fun `on empty movie genres, movieGenreApi is called`() = runBlocking {
+        givenMovieGenresEmpty()
+        givenConfigApiReturnsValidConfig()
+        givenMovieDiscoveryApiReturnsValidResponse()
+
+        //When
+        repository.fetchMovieGenres()
+
+        //Then
+        coVerify(atLeast = 1) { genreApi.fetchMovieGenres() }
+    }
+
+    @Test
+    fun `on movie genres not empty, movieGenreApi is not called`() = runBlocking {
+        givenMovieGenresNotEmpty()
+        givenConfigApiReturnsValidConfig()
+        givenMovieDiscoveryApiReturnsValidResponse()
+        //When
+        repository.fetchMovieGenres()
+
+        //Then
+        coVerify { genreApi.fetchMovieGenres() wasNot called }
+    }
+
+    @Test
+    fun `if no movieGenres and genreApi gives valid response, movieGenres get populated`() =
+        runBlocking {
+            givenMovieGenresEmpty()
+            givenGenreApiGivesValidList()
+            givenConfigApiReturnsValidConfig()
+            givenMovieDiscoveryApiReturnsValidResponse()
+
+            //When
+            repository.fetchMovieGenres()
+
+            //Then
+            assert(true)
+            assert(repository.movieGenres[defaultGenreId] == defaultGenreName)
+        }
+
+    @Test
+    fun `mainGenre populated if movieGenres available`() = runBlocking {
+        givenMovieGenresEmpty()
+        givenGenreApiGivesValidList()
+        givenConfigApiReturnsValidConfig()
+        givenMovieDiscoveryApiReturnsValidResponse()
+
+        //When
+        val response = repository.fetchMoviePage(1)
+
+        //Then
+        assert((response as NetworkResponse.Success).data.movies?.get(0)?.mainGenre == defaultGenreName)
+    }
+
+    private fun givenMovieGenresNotEmpty() {
+        repository.movieGenres[defaultGenreId] = defaultGenreName
+    }
+
+    private fun givenMovieGenresEmpty() {
+        repository.movieGenres.clear()
+    }
+
+    private fun givenGenreApiGivesValidList() {
+        coEvery { genreApi.fetchMovieGenres() }.returns(
+            GenreResponse(
+                genres = listOf(Genre(defaultGenreId, defaultGenreName))
+            )
+        )
+    }
+
     private fun givenMovieDiscoveryApiReturnsValidResponse() {
         val pageResponse = getPageResponseWithOneMovie()
         coEvery { movieDiscoveryApi.fetchMoviePage(any()) }.returns(pageResponse)
     }
 
     private fun getPageResponseWithOneMovie(): MoviePageResponse = MoviePageResponse(
-        movies = listOf(MoviePreview(posterPath = "path"))
+        movies = listOf(MoviePreview(posterPath = "path", genreIds = listOf(defaultGenreId)))
     )
 
     private fun givenConfigApiReturnsValidConfig() {
@@ -186,7 +260,6 @@ class MovieDiscoveryRepositoryTest {
         )
         givenConfigHasSecureBaseUrlAs(notEmptyUrl)
         givenConfigHasPosterSizes(listOf(notEmptySize))
-
     }
 
     private fun givenBaseUrlIsEmpty() {
