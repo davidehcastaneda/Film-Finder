@@ -5,15 +5,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dehcast.filmfinder.R
+import androidx.navigation.fragment.navArgs
+import com.dehcast.filmfinder.databinding.FragmentMovieDetailsBinding
 
 class MovieDetailsFragment : Fragment() {
+
+    // This property is only valid between onCreateView and onDestroyView.
+    private var _binding: FragmentMovieDetailsBinding? = null
+    private val binding: FragmentMovieDetailsBinding get() = _binding!!
+    private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+    ): View {
+        _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.title.text = args.movieId.toString()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
 }
