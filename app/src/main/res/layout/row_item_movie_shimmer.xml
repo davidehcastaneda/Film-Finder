@@ -22,7 +22,7 @@
         <View
             android:id="@+id/genre"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail"
@@ -32,7 +32,7 @@
         <View
             android:id="@+id/rating"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail"
@@ -42,7 +42,7 @@
         <View
             android:id="@+id/year"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail"
@@ -73,7 +73,7 @@
         <View
             android:id="@+id/genre2"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail2"
@@ -83,7 +83,7 @@
         <View
             android:id="@+id/rating2"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail2"
@@ -93,7 +93,7 @@
         <View
             android:id="@+id/year2"
             android:layout_width="0dp"
-            android:layout_height="@dimen/text_default"
+            android:layout_height="@dimen/text_small"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail2"

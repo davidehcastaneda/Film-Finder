@@ -25,7 +25,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
-        style="@style/Theme.FilmFinder.Text.Title"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -37,7 +37,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/genre"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -47,7 +47,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/popularity"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -57,7 +57,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/release_year"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"

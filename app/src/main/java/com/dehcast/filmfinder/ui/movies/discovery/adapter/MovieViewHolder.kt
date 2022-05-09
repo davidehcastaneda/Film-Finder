@@ -3,7 +3,6 @@ package com.dehcast.filmfinder.ui.movies.discovery.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,8 +12,8 @@ import com.dehcast.filmfinder.model.MoviePreview
 import com.dehcast.filmfinder.ui.movies.discovery.MovieDiscoveryFragmentDirections
 import com.dehcast.filmfinder.utils.getJustYear
 import com.dehcast.filmfinder.utils.hideIfPropertyIsNullOrResolveWithProperty
+import com.dehcast.filmfinder.utils.setTextOrHideViewIfNoData
 import com.dehcast.filmfinder.utils.toStringWithNoDecimals
-
 
 class MovieViewHolder(
     private val parent: ViewGroup,
@@ -27,15 +26,15 @@ class MovieViewHolder(
 
     fun bindModelToView(model: MoviePreview) {
         setThumbnail(model.posterPath)
-        setTextOrHideIfNoData(binding.title, model.title)
-        setTextOrHideIfNoData(binding.genre, model.mainGenre)
-        setTextOrHideIfNoData(
-            binding.popularity,
-            itemView.context.getString(R.string.popularity_rate,
-                model.voteAverage?.toStringWithNoDecimals())
-        )
-        setTextOrHideIfNoData(binding.releaseYear, model.releaseDate?.getJustYear())
+        model.title.setTextOrHideViewIfNoData(binding.title)
+        model.mainGenre.setTextOrHideViewIfNoData(binding.genre)
+        model.releaseDate?.getJustYear().setTextOrHideViewIfNoData(binding.releaseYear)
         setMovieSelectedClickListener(model.id)
+
+        itemView.context.getString(
+            R.string.popularity_rate,
+            model.voteAverage?.toStringWithNoDecimals()
+        ).setTextOrHideViewIfNoData(binding.popularity)
     }
 
     private fun setMovieSelectedClickListener(movieId: Int?) {
@@ -66,12 +65,6 @@ class MovieViewHolder(
             Glide.with(binding.root.context)
                 .load(urlPath as String)
                 .into(binding.thumbnail)
-        }
-    }
-
-    private fun setTextOrHideIfNoData(view: AppCompatTextView, text: String?) {
-        view.hideIfPropertyIsNullOrResolveWithProperty(text) { notNullText ->
-            view.text = notNullText as String
         }
     }
 }
