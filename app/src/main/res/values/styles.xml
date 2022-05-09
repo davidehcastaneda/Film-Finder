@@ -29,7 +29,6 @@
     </style>
 
     <style name="Theme.FilmFinder.Text.FilmSpecs.Compressed" parent="Theme.FilmFinder.Text.FilmSpecs">
-        <item name="maxLines">1</item>
         <item name="layout_constraintWidth_percent">0.35</item>
     </style>
 </resources>
