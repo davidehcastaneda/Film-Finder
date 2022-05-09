@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/target_discovery_viewholder_width"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/row_item_movie_margin">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/thumbnail_container"
+        style="@style/Theme.FilmFinder.Thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thumbnail_image_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thumbnail_image_height"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="3"
+        app:layout_constraintStart_toStartOf="@id/thumbnail_container"
+        app:layout_constraintTop_toBottomOf="@id/thumbnail_container"
+        app:layout_constraintWidth_percent="0.6"
+        tools:text="Matrix" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genre"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/thumbnail_container"
+        app:layout_constraintTop_toBottomOf="@id/thumbnail_container"
+        tools:text="Action" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/popularity"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/thumbnail_container"
+        app:layout_constraintTop_toBottomOf="@id/genre"
+        tools:text="5/7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/release_year"
+        style="@style/Theme.FilmFinder.Text.FilmSpecs.Compressed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/thumbnail_container"
+        app:layout_constraintTop_toBottomOf="@id/popularity"
+        tools:text="1999" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

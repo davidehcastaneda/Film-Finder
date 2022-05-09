@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.movies.discovery.MovieDiscoveryFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movie_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:listitem="@layout/row_item_movie" />
+
+    <LinearLayout
+        android:id="@+id/shimmer_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <include layout="@layout/row_item_movie_shimmer" />
+
+        <include layout="@layout/row_item_movie_shimmer" />
+
+        <include layout="@layout/row_item_movie_shimmer" />
+
+    </LinearLayout>
+
+</FrameLayout>

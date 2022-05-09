@@ -3,23 +3,35 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: '../dependencies.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 android {
-    compileSdk 32
+    compileSdk versions.compileSdk
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.dehcast.filmfinder"
-        minSdk 24
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode 10000 * versions.major + 1000 * versions.minor + 100 * versions.patch
+        versionName "${versions.major}.${versions.minor}.${versions.patch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/3/\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/3/\""
         }
     }
     compileOptions {
@@ -33,11 +45,47 @@ android {
 
 dependencies {
 
+    implementation(
+            deps.dagger.core,
+            deps.dagger.android,
+            deps.dagger.androidSupport,
+
+            deps.retrofit.core,
+            deps.retrofit.converter,
+            deps.loggingInterceptor,
+
+            deps.navigation.fragment,
+            deps.navigation.ui,
+            deps.navigation.support,
+
+            deps.lifecycle.core,
+            deps.lifecycle.viewmodel,
+            deps.lifecycle.livedata,
+
+            deps.glide.core,
+
+            deps.shimmer
+    )
+
+    kapt(
+            deps.dagger.compiler,
+            deps.dagger.androidCompiler,
+            deps.glide.compiler
+    )
+
+    testImplementation(
+            deps.test.mockK,
+            deps.test.coroutines
+    )
+
+    androidTestImplementation(
+            deps.test.core,
+            deps.test.junit,
+    )
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
