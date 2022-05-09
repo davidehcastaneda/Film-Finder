@@ -14,6 +14,7 @@ import com.dehcast.filmfinder.R
 import com.dehcast.filmfinder.databinding.FragmentMovieDiscoveryBinding
 import com.dehcast.filmfinder.ui.movies.discovery.adapter.BottomReachedListener
 import com.dehcast.filmfinder.ui.movies.discovery.adapter.MovieDiscoveryAdapter
+import com.dehcast.filmfinder.ui.movies.discovery.strategy.ColumnSelectionStrategy
 import com.dehcast.filmfinder.utils.getDpAsFloat
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -26,6 +27,9 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding: FragmentMovieDiscoveryBinding get() = _binding!!
+
+    @Inject
+    internal lateinit var columnSelectionStrategy: ColumnSelectionStrategy
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -66,8 +70,8 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
     private fun updateRecyclerColumnsBasedOffOrientation() {
         val windowWidth = resources.displayMetrics.run { widthPixels / density }
         val idealViewHolderWidth = resources.getDpAsFloat(R.dimen.target_discovery_viewholder_width)
-        recyclerColumns = (windowWidth / idealViewHolderWidth).toInt()
-        if (recyclerColumns == 0) recyclerColumns = 1
+        recyclerColumns =
+            columnSelectionStrategy.determineColumnCount(windowWidth, idealViewHolderWidth)
     }
 
     private fun observeViewModel() {
