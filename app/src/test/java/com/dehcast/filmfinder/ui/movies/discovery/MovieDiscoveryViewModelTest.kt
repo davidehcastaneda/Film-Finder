@@ -5,6 +5,7 @@ import com.dehcast.filmfinder.model.MoviePreview
 import com.dehcast.filmfinder.model.NetworkResponse
 import com.dehcast.filmfinder.repositories.MovieDiscoveryRepository
 import io.mockk.*
+import io.mockk.InternalPlatformDsl.toArray
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,8 +31,9 @@ class MovieDiscoveryViewModelTest {
     @MockK
     private lateinit var SUCCESS: NetworkResponse.Success<MoviePageResponse>
 
-    @MockK
-    private lateinit var FAKE_MOVIES: List<MoviePreview>
+    private val defaultMovies = mutableListOf(MoviePreview())
+
+    private var FAKE_MOVIES: List<MoviePreview> = defaultMovies
 
     @Before
     fun setUp() {
@@ -93,6 +95,7 @@ class MovieDiscoveryViewModelTest {
     fun `if repo returns success on fetchMoviePage, success state is published`() {
         givenCanQueryMoreTrue()
         givenFetchPageSucceeds()
+        givenSuccessHasData()
 
         whenFetchMoviePage()
 
@@ -140,7 +143,7 @@ class MovieDiscoveryViewModelTest {
     private fun givenSuccessHasData() {
         givenPageWithLotsOfPages()
         every { FAKE_PAGE_RESPONSE.movies }.returns(FAKE_MOVIES)
-        every { FAKE_MOVIES.isEmpty() }.returns(false)
+        FAKE_MOVIES = defaultMovies
     }
 
     private fun givenSuccessHasNULLMovies() {
@@ -151,7 +154,7 @@ class MovieDiscoveryViewModelTest {
     private fun givenSuccessHasNOMovies() {
         givenPageWithLotsOfPages()
         every { FAKE_PAGE_RESPONSE.movies }.returns(emptyList())
-        every { FAKE_MOVIES.isEmpty() }.returns(true)
+        FAKE_MOVIES = emptyList()
     }
 
     private fun givenPageWithLotsOfPages() {

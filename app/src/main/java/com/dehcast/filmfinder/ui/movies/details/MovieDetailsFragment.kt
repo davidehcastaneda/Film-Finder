@@ -104,14 +104,6 @@ class MovieDetailsFragment : DaggerFragment() {
         }
     }
 
-    private fun setThumbnail(posterPath: String?) {
-        binding.thumbnail.hideIfPropertyIsNullOrResolveWithProperty(posterPath) { urlPath ->
-            Glide.with(requireContext())
-                .load(urlPath as String)
-                .into(binding.thumbnail)
-        }
-    }
-
     private fun setHomePageLink(homepage: String?) {
         with(binding.visitSiteButton) {
             if (homepage == null) visibility = View.GONE
@@ -126,6 +118,14 @@ class MovieDetailsFragment : DaggerFragment() {
         startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
     }
 
+    private fun setThumbnail(posterPath: String?) {
+        binding.thumbnail.hideIfPropertyIsNullOrResolveWithProperty(posterPath) { urlPath ->
+            Glide.with(requireContext())
+                .load(urlPath as String)
+                .into(binding.thumbnail)
+        }
+    }
+
     private fun fetchMovieDetails() {
         movieDetailsViewModel.fetchMovieDetails(args.movieId)
     }
@@ -134,5 +134,4 @@ class MovieDetailsFragment : DaggerFragment() {
         _binding = null
         super.onDestroyView()
     }
-
 }
