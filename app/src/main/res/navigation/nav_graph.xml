@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_movie_discovery">
         <action
             android:id="@+id/action_movieDiscoveryFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
 
     <fragment
