@@ -4,7 +4,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dehcast.filmfinder.model.MoviePreview
 
-class MovieDiscoveryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+interface BottomReachedListener {
+
+    fun onBottomReached()
+}
+
+class MovieDiscoveryAdapter(
+    private val bottomReachedListener: BottomReachedListener,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val movies = mutableListOf<MoviePreview>()
 
@@ -12,7 +19,10 @@ class MovieDiscoveryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as MovieViewHolder).bindModelToView(movies[position])
+        if (isLastItem(position)) bottomReachedListener.onBottomReached()
     }
+
+    private fun isLastItem(position: Int) = position == movies.size - 1
 
     override fun getItemCount() = movies.size
 
