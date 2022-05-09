@@ -20,13 +20,23 @@
             app:layout_constraintWidth_percent="0.45" />
 
         <View
-            android:id="@+id/rating"
+            android:id="@+id/genre"
             android:layout_width="0dp"
             android:layout_height="@dimen/text_default"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toBottomOf="@id/thumbnail"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/rating"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/genre"
             app:layout_constraintWidth_percent="0.12" />
 
         <View
@@ -61,13 +71,23 @@
             app:layout_constraintWidth_percent="0.45" />
 
         <View
-            android:id="@+id/rating2"
+            android:id="@+id/genre2"
             android:layout_width="0dp"
             android:layout_height="@dimen/text_default"
             android:layout_marginTop="@dimen/thumbnail_padding"
             android:background="@color/gray_100"
             app:layout_constraintEnd_toEndOf="@id/thumbnail2"
             app:layout_constraintTop_toBottomOf="@id/thumbnail2"
+            app:layout_constraintWidth_percent="0.12" />
+
+        <View
+            android:id="@+id/rating2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_default"
+            android:layout_marginTop="@dimen/thumbnail_padding"
+            android:background="@color/gray_100"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail2"
+            app:layout_constraintTop_toBottomOf="@id/genre2"
             app:layout_constraintWidth_percent="0.12" />
 
         <View

@@ -28,6 +28,7 @@ class MovieViewHolder(
     fun bindModelToView(model: MoviePreview) {
         setThumbnail(model.posterPath)
         setTextOrHideIfNoData(binding.title, model.title)
+        setTextOrHideIfNoData(binding.genre, model.mainGenre)
         setTextOrHideIfNoData(
             binding.popularity,
             itemView.context.getString(R.string.popularity_rate,
