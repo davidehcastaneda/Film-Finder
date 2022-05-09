@@ -1,6 +1,5 @@
 package com.dehcast.filmfinder.ui.movies.discovery
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.dehcast.filmfinder.R
 import com.dehcast.filmfinder.databinding.FragmentMovieDiscoveryBinding
 import com.dehcast.filmfinder.ui.movies.discovery.adapter.BottomReachedListener
 import com.dehcast.filmfinder.ui.movies.discovery.adapter.MovieDiscoveryAdapter
+import com.dehcast.filmfinder.utils.getDpAsFloat
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -38,9 +38,7 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
     }
 
     private val movieAdapter by lazy { MovieDiscoveryAdapter(this) }
-    private val landscapeColumns = 4
-    private val portraitColumns = 2
-    private var recyclerColumns = portraitColumns
+    private var recyclerColumns = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,13 +64,10 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
     }
 
     private fun updateRecyclerColumnsBasedOffOrientation() {
-        try {
-            val orientation = requireActivity().resources.configuration.orientation
-            recyclerColumns =
-                if (orientation == Configuration.ORIENTATION_PORTRAIT) portraitColumns
-                else landscapeColumns
-        } catch (e: Throwable) {
-        }
+        val windowWidth = resources.displayMetrics.run { widthPixels / density }
+        val idealViewHolderWidth = resources.getDpAsFloat(R.dimen.target_discovery_viewholder_width)
+        recyclerColumns = (windowWidth / idealViewHolderWidth).toInt()
+        if (recyclerColumns == 0) recyclerColumns = 1
     }
 
     private fun observeViewModel() {
