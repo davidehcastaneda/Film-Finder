@@ -88,7 +88,8 @@ class MovieDetailsFragment : DaggerFragment() {
                 .setTextOrHideViewIfNoData(binding.releaseYear, R.string.year_template)
             runtime?.toString()
                 ?.setTextOrHideViewIfNoData(binding.runtime, R.string.runtime_template)
-            mainGenre.setTextOrHideViewIfNoData(binding.genre, R.string.genre_template)
+            genres?.firstOrNull { it.name != null }?.name.setTextOrHideViewIfNoData(binding.genre,
+                R.string.genre_template)
             setThumbnail(posterPath)
         }
     }
