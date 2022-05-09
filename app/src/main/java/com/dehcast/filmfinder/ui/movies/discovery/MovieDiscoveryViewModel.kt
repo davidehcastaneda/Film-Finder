@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dehcast.filmfinder.model.MoviePageResponse
+import com.dehcast.filmfinder.model.MoviePreview
 import com.dehcast.filmfinder.model.NetworkResponse
 import com.dehcast.filmfinder.repositories.MovieDiscoveryRepositoryContract
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,8 @@ class MovieDiscoveryViewModel @Inject constructor(
     private val _state: MutableStateFlow<MovieDiscoveryState> by lazy {
         MutableStateFlow(MovieDiscoveryState.None)
     }
+
+    private val cachedMovies = mutableListOf<MoviePreview>()
 
     val state: StateFlow<MovieDiscoveryState> by lazy { _state }
 
@@ -49,9 +52,13 @@ class MovieDiscoveryViewModel @Inject constructor(
     fun handlePageFetched(response: NetworkResponse.Success<MoviePageResponse>) {
         checkIfCanStillQueryMore(response.data.totalPages)
         val results = response.data.movies
-        _state.value =
-            if (results.isNullOrEmpty()) MovieDiscoveryState.Failure
-            else MovieDiscoveryState.Success(results)
+        if (results.isNullOrEmpty()) _state.value = MovieDiscoveryState.Failure
+        else cacheAndPublishMovies(results)
+    }
+
+    private fun cacheAndPublishMovies(results: List<MoviePreview>) {
+        cachedMovies.addAll(results)
+        _state.value = (MovieDiscoveryState.Success(cachedMovies))
     }
 
     @VisibleForTesting
