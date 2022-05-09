@@ -37,5 +37,4 @@ data class FullMovie(
     val runtime: Int? = null,
     @SerializedName("release_date")
     val releaseDate: String? = null,
-    val mainGenre: String,
 )

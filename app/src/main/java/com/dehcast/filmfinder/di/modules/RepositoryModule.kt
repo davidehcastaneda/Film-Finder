@@ -28,5 +28,7 @@ class RepositoryModule {
     @Singleton
     fun provideMovieDetailsRepository(
         movieDetailsApi: MovieDetailsApi,
-    ): MovieDetailsRepositoryContract = MovieDetailsRepository(movieDetailsApi)
+        thumbnailConfigurationApi: MovieThumbnailConfigurationApi,
+    ): MovieDetailsRepositoryContract =
+        MovieDetailsRepository(movieDetailsApi, thumbnailConfigurationApi)
 }
