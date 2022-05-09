@@ -3,4 +3,11 @@
     <string name="movie_discovery_fetch_failed_message">Ooops, something went wrong</string>
     <string name="popularity_rate">%s/10</string>
     <string name="movie_with_no_id_onclick_error_message">I Can\'t find movie details for that one… /n try again later.</string>
+    <string name="no_movie_details_found">Sorry, I couldn\'t get you the details :(.</string>
+    <string name="about_separator_text">About</string>
+    <string name="visit_site">Visit Site</string>
+    <string name="year_template">Year: %s</string>
+    <string name="genre_template">Genre: %s</string>
+    <string name="runtime_template">Runtime: %s</string>
+    <string name="popularity_template">Rate: %s/10</string>
 </resources>

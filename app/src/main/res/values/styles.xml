@@ -8,15 +8,27 @@
     <style name="Theme.FilmFinder.Text" parent="Theme.FilmFinder">
         <item name="android:textStyle">normal</item>
         <item name="fontFamily">@font/montserrat_medium</item>
-        <item name="android:textSize">@dimen/text_default</item>
+        <item name="android:textSize">@dimen/text_small</item>
     </style>
 
     <style name="Theme.FilmFinder.Text.Title" parent="Theme.FilmFinder.Text">
         <item name="fontFamily">@font/montserrat_bold</item>
     </style>
 
+    <style name="Theme.FilmFinder.Text.Title.Medium" parent="Theme.FilmFinder.Text.Title">
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+
     <style name="Theme.FilmFinder.Text.FilmSpecs" parent="Theme.FilmFinder.Text">
         <item name="lineHeight">@dimen/movie_title_line_spacing</item>
+    </style>
+
+    <style name="Theme.FilmFinder.Text.FilmSpecs.Description" parent="Theme.FilmFinder.Text">
+        <item name="lineHeight">@dimen/movie_title_description_spacing</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+
+    <style name="Theme.FilmFinder.Text.FilmSpecs.Compressed" parent="Theme.FilmFinder.Text.FilmSpecs">
         <item name="maxLines">1</item>
         <item name="layout_constraintWidth_percent">0.35</item>
     </style>
