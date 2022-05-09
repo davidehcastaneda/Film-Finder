@@ -6,6 +6,6 @@ import retrofit2.http.Query
 
 interface MovieDiscoveryApi {
 
-    @GET("discover/movie")
+    @GET("movie/popular")
     suspend fun fetchMoviePage(@Query("page") page: Int): MoviePageResponse
 }
