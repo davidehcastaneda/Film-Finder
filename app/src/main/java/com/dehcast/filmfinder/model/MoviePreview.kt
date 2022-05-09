@@ -26,4 +26,5 @@ data class MoviePreview(
     val video: Boolean? = null,
     @SerializedName("vote_average")
     val voteAverage: Double? = null,
+    val mainGenre: String? = null,
 )
