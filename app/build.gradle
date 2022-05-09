@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
-    compileSdk 32
+    compileSdk versions.compileSdk
 
     buildFeatures {
         viewBinding true
@@ -16,10 +16,10 @@ android {
 
     defaultConfig {
         applicationId "com.dehcast.filmfinder"
-        minSdk 24
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode 10000 * versions.major + 1000 * versions.minor + 100 * versions.patch
+        versionName "${versions.major}.${versions.minor}.${versions.patch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
