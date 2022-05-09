@@ -107,10 +107,23 @@ class MovieDiscoveryRepositoryTest {
     }
 
     @Test
-    fun `getThumbnailUrlFrom() uses first not empty posterSize`() {
+    fun `getThumbnailUrlFrom() uses first not empty posterSize if secondOption not available`() {
         givenExpectedUrlIsComposedOf(notEmptyUrl, notEmptySize)
         givenConfigHasSecureBaseUrlAs(notEmptyUrl)
         givenConfigHasPosterSizes(listOf("", "", notEmptySize))
+
+        //When
+        val response = repository.getThumbnailUrlFrom(thumbnailConfig)
+
+        //Then
+        assert(response == expectedUrl)
+    }
+
+    @Test
+    fun `getThumbnailUrlFrom() uses second posterSize if not empty`() {
+        givenExpectedUrlIsComposedOf(notEmptyUrl, notEmptySize)
+        givenConfigHasSecureBaseUrlAs(notEmptyUrl)
+        givenConfigHasPosterSizes(listOf("A", notEmptySize, "A"))
 
         //When
         val response = repository.getThumbnailUrlFrom(thumbnailConfig)
