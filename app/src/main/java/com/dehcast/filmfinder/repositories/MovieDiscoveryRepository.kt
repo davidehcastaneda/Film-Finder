@@ -58,7 +58,15 @@ class MovieDiscoveryRepository(
     @VisibleForTesting
     fun getThumbnailUrlFrom(config: ThumbnailConfiguration): String {
         val baseUrl = config.secureBaseUrl ?: config.baseUrl
-        val posterSizes = config.posterSizes ?: emptyList()
+        val posterSizes = removePosterSizeIfMoreAvailable(config.posterSizes)
         return baseUrl + posterSizes.firstOrNull { it.isNotBlank() }
+    }
+
+    private fun removePosterSizeIfMoreAvailable(posterSizes: List<String>?): List<String> {
+        return when {
+            posterSizes.isNullOrEmpty() -> emptyList()
+            posterSizes.size == 1 -> posterSizes
+            else -> posterSizes.drop(1)
+        }
     }
 }
