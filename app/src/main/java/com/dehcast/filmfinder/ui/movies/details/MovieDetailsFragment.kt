@@ -67,17 +67,27 @@ class MovieDetailsFragment : DaggerFragment() {
 
     private fun onStateChanged(state: MovieDetailsState) {
         when (state) {
+            is MovieDetailsState.Loading -> onLoadingState()
             MovieDetailsState.Failure -> onFailureState()
             is MovieDetailsState.Success -> onSuccessState(state)
         }
     }
 
+    private fun onLoadingState() {
+        binding.shimmer.visibility = View.VISIBLE
+        binding.content.visibility = View.GONE
+    }
+
     private fun onFailureState() {
+        binding.shimmer.visibility = View.GONE
+        binding.content.visibility = View.GONE
         Toast.makeText(context, getString(R.string.no_movie_details_found), Toast.LENGTH_LONG)
             .show()
     }
 
     private fun onSuccessState(state: MovieDetailsState.Success) {
+        binding.shimmer.visibility = View.GONE
+        binding.content.visibility = View.VISIBLE
         with(state.data) {
             title.setTextOrHideViewIfNoData(binding.title)
             voteAverage?.toStringWithNoDecimals()
@@ -103,7 +113,7 @@ class MovieDetailsFragment : DaggerFragment() {
     }
 
     private fun setHomePageLink(homepage: String?) {
-        with(binding.url) {
+        with(binding.visitSiteButton) {
             if (homepage == null) visibility = View.GONE
             else {
                 visibility = View.VISIBLE

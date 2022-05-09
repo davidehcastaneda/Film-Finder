@@ -6,119 +6,232 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/row_item_movie_margin">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/thumbnail_container"
-        style="@style/Theme.FilmFinder.Thumbnail"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/thumbnail_image_height"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.45">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/thumbnail_image_height"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title"
-        style="@style/Theme.FilmFinder.Text.Title.Medium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/thumbnail_container"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.45"
-        tools:text="Matrix" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/genre"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/popularity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="Action" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/popularity"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/release_year"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/genre"
-        tools:text="5/7" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/release_year"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/runtime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/popularity"
-        tools:text="1999" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/runtime"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/url"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/release_year"
-        tools:text="12.23H" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/url"
-        style="@style/Theme.FilmFinder.Text.FilmSpecs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorPrimary"
-        android:drawableEnd="@drawable/ic_navigate_to_url"
-        android:text="@string/visit_site"
-        app:layout_constraintBottom_toBottomOf="@id/thumbnail_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/title" />
-
-    <TextView
-        android:id="@+id/about"
-        style="@style/Theme.FilmFinder.Text.Title.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/movie_details_about_top_padding"
-        android:text="@string/about_separator_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/thumbnail_container" />
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/about">
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/thumbnail_container"
+            style="@style/Theme.FilmFinder.Thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/thumbnail_image_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/thumbnail_image_height"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description"
-            style="@style/Theme.FilmFinder.Text.FilmSpecs.Description"
-            android:layout_width="match_parent"
+            android:id="@+id/title"
+            style="@style/Theme.FilmFinder.Text.Title.Medium"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae blandit quam" />
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/thumbnail_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.45"
+            tools:text="Matrix" />
 
-    </ScrollView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/genre"
+            style="@style/Theme.FilmFinder.Text.FilmSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/popularity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Action" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/popularity"
+            style="@style/Theme.FilmFinder.Text.FilmSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/release_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/genre"
+            tools:text="5/7" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/release_year"
+            style="@style/Theme.FilmFinder.Text.FilmSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/runtime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/popularity"
+            tools:text="1999" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/runtime"
+            style="@style/Theme.FilmFinder.Text.FilmSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/visit_site_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/release_year"
+            tools:text="12.23H" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/visit_site_button"
+            style="@style/Theme.FilmFinder.Text.FilmSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorPrimary"
+            android:drawableEnd="@drawable/ic_navigate_to_url"
+            android:text="@string/visit_site"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title" />
+
+        <TextView
+            android:id="@+id/about"
+            style="@style/Theme.FilmFinder.Text.Title.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/movie_details_about_top_padding"
+            android:text="@string/about_separator_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail_container" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/about">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                style="@style/Theme.FilmFinder.Text.FilmSpecs.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae blandit quam" />
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/shimmer_thumbnail_container"
+                style="@style/Theme.FilmFinder.Thumbnail"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/thumbnail_image_height"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thumbnail_image_height"
+                    android:background="@color/gray_100"
+                    app:layout_constraintWidth_percent="0.45" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/shimmer_title"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/text_medium"
+                android:background="@color/gray_100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shimmer_thumbnail_container"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.45" />
+
+            <View
+                android:id="@+id/shimmer_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:layout_marginBottom="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintBottom_toTopOf="@id/shimmer_visit_site_button"
+                app:layout_constraintEnd_toEndOf="@id/shimmer_title"
+                app:layout_constraintStart_toStartOf="@id/shimmer_title"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_title" />
+
+            <View
+                android:id="@+id/shimmer_visit_site_button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/shimmer_visit_site_button_height"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintBottom_toBottomOf="@id/shimmer_thumbnail_container"
+                app:layout_constraintEnd_toEndOf="@id/shimmer_title"
+                app:layout_constraintStart_toStartOf="@id/shimmer_title" />
+
+            <View
+                android:id="@+id/shimmer_about"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/text_medium"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_thumbnail_container"
+                app:layout_constraintWidth_percent="0.2" />
+
+            <View
+                android:id="@+id/shimmer_description_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_about" />
+
+            <View
+                android:id="@+id/shimmer_description_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_description_1" />
+
+            <View
+                android:id="@+id/shimmer_description_3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_medium"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_description_2" />
+
+            <View
+                android:id="@+id/shimmer_description_4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/text_medium"
+                android:layout_marginTop="@dimen/movie_title_line_spacing"
+                android:background="@color/gray_100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmer_description_3"
+                app:layout_constraintWidth_percent="0.7" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
