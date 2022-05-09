@@ -23,7 +23,6 @@ class MovieViewHolder(
         false
     ),
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bindModelToView(model: MoviePreview) {
         setThumbnail(model.posterPath)
         model.title.setTextOrHideViewIfNoData(binding.title)
@@ -37,19 +36,19 @@ class MovieViewHolder(
         ).setTextOrHideViewIfNoData(binding.popularity)
     }
 
+    private fun setThumbnail(posterPath: String?) {
+        binding.thumbnail.hideIfPropertyIsNullOrResolveWithProperty(posterPath) { urlPath ->
+            Glide.with(binding.root.context)
+                .load(urlPath as String)
+                .into(binding.thumbnail)
+        }
+    }
+
     private fun setMovieSelectedClickListener(movieId: Int?) {
         binding.root.setOnClickListener {
             if (movieId == null) toastNoMovieIdError()
             else navigateToMovieDetailsFragment(movieId)
         }
-    }
-
-    private fun navigateToMovieDetailsFragment(movieId: Int) {
-        Navigation.findNavController(binding.root).navigate(
-            MovieDiscoveryFragmentDirections.actionMovieDiscoveryFragmentToMovieDetailsFragment(
-                movieId
-            )
-        )
     }
 
     private fun toastNoMovieIdError() {
@@ -60,11 +59,11 @@ class MovieViewHolder(
         ).show()
     }
 
-    private fun setThumbnail(posterPath: String?) {
-        binding.thumbnail.hideIfPropertyIsNullOrResolveWithProperty(posterPath) { urlPath ->
-            Glide.with(binding.root.context)
-                .load(urlPath as String)
-                .into(binding.thumbnail)
-        }
+    private fun navigateToMovieDetailsFragment(movieId: Int) {
+        Navigation.findNavController(binding.root).navigate(
+            MovieDiscoveryFragmentDirections.actionMovieDiscoveryFragmentToMovieDetailsFragment(
+                movieId
+            )
+        )
     }
 }

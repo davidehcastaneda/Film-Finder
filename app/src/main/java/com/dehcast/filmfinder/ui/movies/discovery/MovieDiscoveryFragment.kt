@@ -87,8 +87,8 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
 
     private fun onStateChanged(state: MovieDiscoveryState) {
         when (state) {
-            MovieDiscoveryState.Failure -> onFailureState()
             MovieDiscoveryState.Loading -> onLoadingState()
+            MovieDiscoveryState.Failure -> onFailureState()
             is MovieDiscoveryState.Success -> onSuccessState(state)
         }
     }
@@ -131,5 +131,4 @@ class MovieDiscoveryFragment : DaggerFragment(), BottomReachedListener {
     override fun onBottomReached() {
         movieDiscoveryViewModel.fetchMoviePage()
     }
-
 }

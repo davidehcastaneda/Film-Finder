@@ -56,11 +56,6 @@ class MovieDiscoveryViewModel @Inject constructor(
         else cacheAndPublishMovies(results)
     }
 
-    private fun cacheAndPublishMovies(results: List<MoviePreview>) {
-        cachedMovies.addAll(results)
-        _state.value = (MovieDiscoveryState.Success(cachedMovies))
-    }
-
     @VisibleForTesting
     fun checkIfCanStillQueryMore(availablePages: Int?) {
         currentPage++
@@ -69,4 +64,8 @@ class MovieDiscoveryViewModel @Inject constructor(
         }
     }
 
+    private fun cacheAndPublishMovies(results: List<MoviePreview>) {
+        cachedMovies.addAll(results)
+        _state.value = (MovieDiscoveryState.Success(cachedMovies))
+    }
 }
